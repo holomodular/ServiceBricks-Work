@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Version>1.3.0-a</Version>
+		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
+		<PackageId>ServiceBricks.Work.Microservice</PackageId>
+		<Title>ServiceBricks.Work.Microservice</Title>
+		<AssemblyTitle>ServiceBricks.Work.Microservice</AssemblyTitle>
+		<Authors>holomodular</Authors>
+		<Company>HoloModular LLC</Company>
+		<Product>ServiceBricks</Product>
+		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+		<Nullable>disable</Nullable>
+		<Copyright>Copyright © 2025 HoloModular LLC. All Rights Reserved. Visit https://HoloModular.com to learn more.</Copyright>
+		<PackageProjectUrl>https://ServiceBricks.com</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>servicebricks;work;microservice</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>Resource\ServiceBricks.Work.Microservice.snk</AssemblyOriginatorKeyFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/holomodular/ServiceBricks-Work</RepositoryUrl>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+		<IsPackable>True</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="Resource\readme.md" Pack="True" PackagePath="\" />
+		<None Include="Resource\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Core" Version="1.3.0-a" />
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.3.0-a" />
+	</ItemGroup>
+    <ItemGroup>
+		<ProjectReference Include="..\ServiceBricks.Work.EntityFrameworkCore\ServiceBricks.Work.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+    <ItemGroup>
+		<ProjectReference Include="..\ServiceBricks.Work\ServiceBricks.Work.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.AzureDataTables\ServiceBricks.Work.AzureDataTables.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.AzureDataTables.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.Cosmos\ServiceBricks.Work.Cosmos.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.Cosmos.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.EntityFrameworkCore\ServiceBricks.Work.EntityFrameworkCore.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.EntityFrameworkCore.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.InMemory\ServiceBricks.Work.InMemory.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.InMemory.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.MongoDb\ServiceBricks.Work.MongoDb.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.MongoDb.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.Postgres\ServiceBricks.Work.Postgres.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.Postgres.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.Sqlite\ServiceBricks.Work.Sqlite.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.Sqlite.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\ServiceBricks.Work.SqlServer\ServiceBricks.Work.SqlServer.csproj" PrivateAssets="All">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>ServiceBricks.Work.SqlServer.dll</IncludeAssets>
+		</ProjectReference>
+	</ItemGroup>
+	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+		</ItemGroup>
+	</Target>
+</Project>
