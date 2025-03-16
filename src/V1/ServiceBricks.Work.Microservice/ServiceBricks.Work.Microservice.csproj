@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.3.0-a</Version>
+		<Version>1.3.0-c</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Work.Microservice</PackageId>
 		<Title>ServiceBricks.Work.Microservice</Title>
@@ -33,8 +33,8 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Core" Version="1.3.0-a" />
-		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.3.0-a" />
+		<PackageReference Include="ServiceBricks.Core" Version="1.3.0-c" />
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.3.0-c" />
 	</ItemGroup>
     <ItemGroup>
 		<ProjectReference Include="..\ServiceBricks.Work.EntityFrameworkCore\ServiceBricks.Work.EntityFrameworkCore.csproj" />
