@@ -14,10 +14,6 @@ namespace ServiceBricks.Work.AzureDataTables
         /// </summary>
         public WorkAzureDataTablesModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(WorkAzureDataTablesModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 WorkModule.Instance

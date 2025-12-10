@@ -1,8 +1,6 @@
 using Asp.Versioning;
-using Microsoft.OpenApi.Models;
-using ServiceBricks;
+using Microsoft.OpenApi;
 using WebApp.Model;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebApp.Extensions
 {
@@ -39,13 +37,19 @@ namespace WebApp.Extensions
             });
             services.AddSwaggerGen(options =>
             {
-                options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+                options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
-                    Name = "Authorization",
-                    Description = "JWT token must be provided",
-                    In = ParameterLocation.Header,
+                    Description = "JWT token must be provided. Call AuthenticateUser and copy the access_token value into the textbox below.",
                     Type = SecuritySchemeType.Http,
-                    Scheme = JwtBearerDefaults.AuthenticationScheme
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+                options.AddSecurityRequirement(doc =>
+                {
+                    return new OpenApiSecurityRequirement()
+                    {
+                        {  new OpenApiSecuritySchemeReference("bearer"), new List<string>() }
+                    };
                 });
                 options.ResolveConflictingActions(descriptions =>
                 {

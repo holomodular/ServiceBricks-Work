@@ -25,7 +25,7 @@ namespace WebApp
             services.AddServiceBricksNotificationAzureDataTables(Configuration);
             services.AddServiceBricksSecurityAzureDataTables(Configuration);
             services.AddServiceBricksWorkAzureDataTables(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Automapper registration (problemdetails)
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

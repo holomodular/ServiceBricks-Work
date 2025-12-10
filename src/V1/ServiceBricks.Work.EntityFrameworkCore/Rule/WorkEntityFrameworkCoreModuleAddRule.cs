@@ -60,6 +60,8 @@ namespace ServiceBricks.Work.EntityFrameworkCore
             services.AddScoped<IApiService<ProcessDto>, ProcessApiService>();
             services.AddScoped<IProcessApiService, ProcessApiService>();
 
+            // AI: Register mappings
+            ProcessMappingProfile.Register(MapperRegistry.Instance);
 
             // AI: Register business rules for the module
              DomainCreateUpdateDateRule<Process>.Register(BusinessRuleRegistry.Instance);

@@ -40,11 +40,7 @@ namespace ServiceBricks.Work.Cosmos
             
         builder.Entity<Process>().HasKey(key => key.Key);
         builder.Entity<Process>().ToContainer(WorkCosmosConstants.GetContainerName(nameof(Process)));
-#if NET9_0
-#else
         builder.Entity<Process>().HasPartitionKey(key => key.Key);
-#endif
-
 
         }
 
@@ -56,7 +52,7 @@ namespace ServiceBricks.Work.Cosmos
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-#if NET9_0
+#if NET8_0_OR_GREATER
             optionsBuilder.ConfigureWarnings(w => w.Ignore(CosmosEventId.SyncNotSupported));
 #endif
 

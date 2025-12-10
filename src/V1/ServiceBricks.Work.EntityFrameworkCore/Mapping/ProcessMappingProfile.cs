@@ -1,52 +1,51 @@
-using AutoMapper;
-
 namespace ServiceBricks.Work.EntityFrameworkCore
 {
     /// <summary>
-    /// This is an automapper profile for the Process domain object.
+    /// This is an mapping profile for the Process domain object.
     /// </summary>
-    public partial class ProcessMappingProfile : Profile
+    public partial class ProcessMappingProfile
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public ProcessMappingProfile()
-        {
-            // AI: Add mappings
-            CreateMap<ProcessDto, Process>()
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.Key, y => y.MapFrom<KeyResolver>());
-
-            CreateMap<Process, ProcessDto>()
-                .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.Key));
-        }
-
 
         /// <summary>
-        /// Resolver for the Process mapping.
+        /// Register the mapping
         /// </summary>
-        public class KeyResolver : IValueResolver<DataTransferObject, object, Guid>
+        public static void Register(IMapperRegistry registry)
         {
-            /// <summary>
-            /// Resolve the key from the StorageKey property.
-            /// </summary>
-            /// <param name="source"></param>
-            /// <param name="destination"></param>
-            /// <param name="sourceMember"></param>
-            /// <param name="context"></param>
-            /// <returns></returns>
-            public Guid Resolve(DataTransferObject source, object destination, Guid sourceMember, ResolutionContext context)
-            {
-                if (string.IsNullOrEmpty(source.StorageKey))
-                    return Guid.Empty;
-
-                // AI: Parse the value and make sure it is valid
-                Guid tempKey;
-                if (Guid.TryParse(source.StorageKey, out tempKey))
-                    return tempKey;
-                return Guid.Empty;
-            }
+            registry.Register<Process, ProcessDto>(
+                (s, d) =>
+                {
+                    d.CreateDate = s.CreateDate;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;
+                    d.StorageKey = s.Key.ToString();
+                    d.UpdateDate = s.UpdateDate;
+                });
+            registry.Register<ProcessDto, Process>(
+                (s, d) =>
+                {
+                    //d.CreateDate ignore by rule
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;
+                    if (Guid.TryParse(s.StorageKey, out var tempStorageKey))
+                        d.Key = tempStorageKey;
+                    d.UpdateDate = s.UpdateDate;
+                });
         }
-
     }
 }

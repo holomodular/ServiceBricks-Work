@@ -25,7 +25,7 @@ namespace WebApp
             services.AddServiceBricksNotificationInMemory(Configuration);
             services.AddServiceBricksSecurityInMemory(Configuration);
             services.AddServiceBricksWorkInMemory(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Automapper registration (problemdetails)
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

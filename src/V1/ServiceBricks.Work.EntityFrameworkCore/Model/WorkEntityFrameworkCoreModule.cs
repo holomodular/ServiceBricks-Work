@@ -14,10 +14,6 @@ namespace ServiceBricks.Work.EntityFrameworkCore
         /// </summary>
         public WorkEntityFrameworkCoreModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(WorkEntityFrameworkCoreModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 WorkModule.Instance

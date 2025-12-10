@@ -1,29 +1,58 @@
-using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ServiceBricks.Storage.AzureDataTables;
+using System.Net;
 
 namespace ServiceBricks.Work.AzureDataTables
 {
     /// <summary>
     /// This is an automapper profile for the Process domain object.
     /// </summary>
-    public partial class ProcessMappingProfile : Profile
+    public partial class ProcessMappingProfile
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public ProcessMappingProfile()
-        {
-            // AI: Add mappings
-            CreateMap<ProcessDto, Process>()
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.PartitionKey, y => y.MapFrom<PartitionKeyResolver>())
-                .ForMember(x => x.RowKey, y => y.MapFrom<RowKeyResolver>())
-                .ForMember(x => x.ETag, y => y.Ignore())
-                .ForMember(x => x.Timestamp, y => y.Ignore())
-                .ForMember(x => x.Key, y => y.Ignore());
 
-            CreateMap<Process, ProcessDto>()
-                .ForMember(x => x.StorageKey, y => y.MapFrom<StorageKeyResolver>());
+        /// <summary>
+        /// Register the mapping
+        /// </summary>
+        public static void Register(IMapperRegistry registry)
+        {
+            registry.Register<Process, ProcessDto>(
+                (s, d) =>
+                {
+                    d.CreateDate = s.CreateDate;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;
+                    d.StorageKey = s.Key.ToString();
+                    d.UpdateDate = s.UpdateDate;                    
+                });
+            registry.Register<ProcessDto, Process>(
+                (s, d) =>
+                {
+                    //d.CreateDate = s.CreateDate;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;
+                    if (Guid.TryParse(s.StorageKey, out var tempStorageKey))
+                        d.Key = tempStorageKey;
+                    d.UpdateDate = s.UpdateDate;
+                    d.PartitionKey = d.Key.ToString();
+                    d.RowKey = string.Empty;
+                });
         }
+
     }
 }

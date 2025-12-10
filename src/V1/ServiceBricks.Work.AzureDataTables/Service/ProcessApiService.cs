@@ -1,5 +1,3 @@
-using AutoMapper;
-
 namespace ServiceBricks.Work.AzureDataTables
 {
     /// <summary>

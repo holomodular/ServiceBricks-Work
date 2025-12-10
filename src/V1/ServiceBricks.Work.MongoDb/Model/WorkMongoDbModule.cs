@@ -14,10 +14,6 @@ namespace ServiceBricks.Work.MongoDb
         /// </summary>
         public WorkMongoDbModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(WorkMongoDbModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 WorkModule.Instance

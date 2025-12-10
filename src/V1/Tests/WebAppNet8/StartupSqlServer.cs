@@ -25,7 +25,7 @@ namespace WebApp
             services.AddServiceBricksNotificationSqlServer(Configuration);
             services.AddServiceBricksSecuritySqlServer(Configuration);
             services.AddServiceBricksWorkSqlServer(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Automapper registration (problemdetails)
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

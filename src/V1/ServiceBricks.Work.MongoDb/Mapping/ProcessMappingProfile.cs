@@ -1,24 +1,49 @@
-using AutoMapper;
-
 namespace ServiceBricks.Work.MongoDb
 {
     /// <summary>
     /// This is an automapper profile for the Process domain object.
     /// </summary>
-    public partial class ProcessMappingProfile : Profile
+    public partial class ProcessMappingProfile
     {
         /// <summary>
-        /// Constructor.
+        /// Register the mapping
         /// </summary>
-        public ProcessMappingProfile()
+        public static void Register(IMapperRegistry registry)
         {
-            // AI: Add mappings
-            CreateMap<ProcessDto, Process>()
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.Key, y => y.MapFrom(z => z.StorageKey));
-
-            CreateMap<Process, ProcessDto>()
-                .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.Key));
+            registry.Register<Process, ProcessDto>(
+                (s, d) =>
+                {
+                    d.CreateDate = s.CreateDate;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;
+                    d.StorageKey = s.Key.ToString();
+                    d.UpdateDate = s.UpdateDate;
+                });
+            registry.Register<ProcessDto, Process>(
+                (s, d) =>
+                {
+                    //d.CreateDate ignore by rule
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsError;
+                    d.IsProcessing = s.IsProcessing;
+                    d.ProcessData = s.ProcessData;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessQueue = s.ProcessQueue;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.ProcessType = s.ProcessType;
+                    d.RetryCount = s.RetryCount;                    
+                    d.Key = s.StorageKey;
+                    d.UpdateDate = s.UpdateDate;
+                });
         }
     }
 }
