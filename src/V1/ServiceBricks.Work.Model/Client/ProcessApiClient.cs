@@ -18,7 +18,7 @@ namespace ServiceBricks.Work
             ILoggerFactory loggerFactory,
             IHttpClientFactory httpClientFactory,
             IConfiguration configuration)
-            : base(loggerFactory, httpClientFactory, configuration.GetApiConfig(WorkConstants.APPSETTING_CLIENT_APICONFIG))
+            : base(loggerFactory, httpClientFactory, configuration.GetApiConfig(WorkModelConstants.APPSETTING_CLIENT_APICONFIG))
         {
             ApiResource = @"Work/Process";
         }

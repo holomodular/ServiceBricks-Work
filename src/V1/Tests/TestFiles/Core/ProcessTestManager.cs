@@ -35,7 +35,7 @@ namespace ServiceBricks.Xunit
 
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate > clientDto.UpdateDate);
             else
                 Assert.True(serviceDto.UpdateDate == clientDto.UpdateDate);
@@ -92,7 +92,7 @@ long proputcTicks = 0;
 
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate.UtcTicks >= ((long)(clientDto.CreateDate.UtcTicks / 10)) * 10);
             else
             {
@@ -126,7 +126,7 @@ long proputcTicks = 0;
                     utcTicks = ((long)(utcTicks / 10)) * 10;
                     Assert.True(serviceDto.ProcessDate.UtcTicks >= utcTicks);
                 }
-                else if (method == HttpMethod.Put)
+                else if (method == HttpMethod.Put || method == HttpMethod.Patch)
                 {
                     // Postgres special handling
                     long utcTicks = clientDto.ProcessDate.UtcTicks;
@@ -149,7 +149,7 @@ long proputcTicks = 0;
                     utcTicks = ((long)(utcTicks / 10)) * 10;
                     Assert.True(serviceDto.FutureProcessDate.UtcTicks >= utcTicks);
                 }
-                else if (method == HttpMethod.Put)
+                else if (method == HttpMethod.Put || method == HttpMethod.Patch)
                 {
                     // Postgres special handling
                     long utcTicks = clientDto.FutureProcessDate.UtcTicks;
@@ -193,7 +193,7 @@ long proputcTicks = 0;
 
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate > clientDto.UpdateDate);
             else
                 Assert.True(serviceDto.UpdateDate == clientDto.UpdateDate);
@@ -285,18 +285,36 @@ long proputcTicks = 0;
 
         public override IApiClient<ProcessDto> GetClient(IServiceProvider serviceProvider)
         {
+            var appconfig = serviceProvider.GetRequiredService<IConfiguration>();
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(appconfig)
+                .AddInMemoryCollection(new Dictionary<string, string?>
+                {
+                    { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "false" },
+                })
+                .Build();
+
             return new ProcessApiClient(
                 serviceProvider.GetRequiredService<ILoggerFactory>(),
                 serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                serviceProvider.GetRequiredService<IConfiguration>());
+                config);
         }
 
         public override IApiClient<ProcessDto> GetClientReturnResponse(IServiceProvider serviceProvider)
         {
+            var appconfig = serviceProvider.GetRequiredService<IConfiguration>();
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(appconfig)
+                .AddInMemoryCollection(new Dictionary<string, string?>
+                {
+                    { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "true" },
+                })
+                .Build();
+
             return new ProcessApiClient(
                 serviceProvider.GetRequiredService<ILoggerFactory>(),
                 serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                serviceProvider.GetRequiredService<IConfiguration>());
+                config);
         }
 
         public override IApiService<ProcessDto> GetService(IServiceProvider serviceProvider)
@@ -337,7 +355,7 @@ long proputcTicks = 0;
 
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate > clientDto.UpdateDate);
             else
                 Assert.True(serviceDto.UpdateDate == clientDto.UpdateDate);

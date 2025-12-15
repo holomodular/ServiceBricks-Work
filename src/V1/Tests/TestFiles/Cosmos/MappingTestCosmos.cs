@@ -1,5 +1,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
+using ServiceBricks.Work;
 
 namespace ServiceBricks.Xunit.Integration
 {
@@ -20,5 +21,16 @@ namespace ServiceBricks.Xunit.Integration
             
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public virtual async Task Test()
+        {
+            var service = SystemManager.ServiceProvider.GetRequiredService<IProcessApiService>();
+
+            var resp = await service.CreateAsync(new ProcessDto() { });
+
+            
+        }
+
     }
 }

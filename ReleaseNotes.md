@@ -1,3 +1,7 @@
+# 1.4.0-c
+- Create new ServiceBricks.Work.Model package and include DTOs, clients and contracts
+- Cosmos context changes
+
 # 1.4.0-a
 - Net10 support and update nuget packages
 - Upgrade mapping profiles

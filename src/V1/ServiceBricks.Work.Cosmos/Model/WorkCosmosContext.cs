@@ -40,7 +40,7 @@ namespace ServiceBricks.Work.Cosmos
             
         builder.Entity<Process>().HasKey(key => key.Key);
         builder.Entity<Process>().ToContainer(WorkCosmosConstants.GetContainerName(nameof(Process)));
-        builder.Entity<Process>().HasPartitionKey(key => key.Key);
+        
 
         }
 

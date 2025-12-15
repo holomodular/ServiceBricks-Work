@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.4.0-a</Version>
+		<Version>1.4.0-c</Version>
 		<Description>This microservice manages work</Description>
 		<AssemblyTitle>ServiceBricks.Work</AssemblyTitle>
 		<Authors>holomodular</Authors>
@@ -8,9 +8,8 @@
 		<Nullable>disable</Nullable>
 		<SignAssembly>False</SignAssembly>
 		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
-    <ItemGroup>
-		<PackageReference Include="ServiceBricks" Version="1.4.0-a" />
-		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-a" />
+	</PropertyGroup>    
+	<ItemGroup>
+		<ProjectReference Include="..\ServiceBricks.Work.Model\ServiceBricks.Work.Model.csproj" />
 	</ItemGroup>
 </Project>

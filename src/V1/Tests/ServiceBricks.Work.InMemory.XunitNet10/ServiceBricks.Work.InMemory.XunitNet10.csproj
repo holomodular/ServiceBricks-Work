@@ -13,6 +13,7 @@
     <Compile Include="..\TestFiles\InMemory\MappingTestInMemory.cs" Link="MappingTestInMemory.cs" />
     <Compile Include="..\TestFiles\InMemory\StartupInMemory.cs" Link="StartupInMemory.cs" />
 	  <Compile Include="..\TestFiles\InMemory\WorkServiceTestsInMemory.cs" Link="WorkServiceTestsInMemory.cs" />
+	  <Compile Include="..\TestFiles\InMemory\ProcessStubApiClientTests.cs" Link="ProcessStubApiClientTests.cs" />
     <Compile Include="..\TestFiles\Usings.cs" Link="Usings.cs" />
   </ItemGroup>
 
@@ -23,7 +24,7 @@
   </ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="10.0.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
 		<PackageReference Include="xunit" Version="2.9.3" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">

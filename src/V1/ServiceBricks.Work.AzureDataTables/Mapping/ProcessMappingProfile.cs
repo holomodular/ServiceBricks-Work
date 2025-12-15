@@ -49,8 +49,7 @@ namespace ServiceBricks.Work.AzureDataTables
                     if (Guid.TryParse(s.StorageKey, out var tempStorageKey))
                         d.Key = tempStorageKey;
                     d.UpdateDate = s.UpdateDate;
-                    d.PartitionKey = d.Key.ToString();
-                    d.RowKey = string.Empty;
+                    d.PartitionKey = d.Key.ToString();                    
                 });
         }
 

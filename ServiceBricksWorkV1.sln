@@ -141,6 +141,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Work.XunitNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppNet10", "src\V1\Tests\WebAppNet10\WebAppNet10.csproj", "{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Work.Model", "src\V1\ServiceBricks.Work.Model\ServiceBricks.Work.Model.csproj", "{A3CBEC1A-3B9E-44D1-9111-FF0CE47AE8FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -391,6 +393,10 @@ Global
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3CBEC1A-3B9E-44D1-9111-FF0CE47AE8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3CBEC1A-3B9E-44D1-9111-FF0CE47AE8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3CBEC1A-3B9E-44D1-9111-FF0CE47AE8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3CBEC1A-3B9E-44D1-9111-FF0CE47AE8FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

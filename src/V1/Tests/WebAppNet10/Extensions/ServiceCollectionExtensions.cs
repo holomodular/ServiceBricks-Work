@@ -8,7 +8,7 @@ namespace WebApp.Extensions
     {
         public static IServiceCollection AddCustomWebsite(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddCors();
@@ -39,7 +39,7 @@ namespace WebApp.Extensions
             {
                 options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
-                    Description = "JWT token must be provided. Call AuthenticateUser and copy the access_token value into the textbox below.",
+                    Description = "JWT token must be provided",
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",
                     Scheme = "bearer"
