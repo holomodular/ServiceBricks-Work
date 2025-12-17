@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Work;
 using ServiceBricks.Work.Sqlite;
-using ServiceBricks.Cache.Sqlite;
+using ServiceBricks.Cache.InMemory;
 
 namespace ServiceBricks.Xunit
 {
@@ -18,7 +18,7 @@ namespace ServiceBricks.Xunit
             base.CustomConfigureServices(services);
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksCacheSqlite(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksWorkSqlite(Configuration);
 
             // Remove all background tasks/timers for unit testing

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ServiceBricks.Cache.AzureDataTables;
+using ServiceBricks.Cache.InMemory;
 using ServiceBricks.Work;
 using ServiceBricks.Work.AzureDataTables;
 
@@ -18,7 +18,7 @@ namespace ServiceBricks.Xunit
             base.CustomConfigureServices(services);
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksCacheAzureDataTables(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksWorkAzureDataTables(Configuration);
 
             // Remove all background tasks/timers for unit testing

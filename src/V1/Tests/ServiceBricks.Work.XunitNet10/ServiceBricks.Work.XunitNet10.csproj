@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFramework>net10.0</TargetFramework>
@@ -17,7 +17,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.4.0-c" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.4.0-d" />
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-d" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\ServiceBricks.Work\ServiceBricks.Work.csproj" />

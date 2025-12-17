@@ -1,3 +1,6 @@
+# 1.4.0-d
+- Verified all tests run successfully for all providers and versions
+
 # 1.4.0-c
 - Create new ServiceBricks.Work.Model package and include DTOs, clients and contracts
 - Cosmos context changes
