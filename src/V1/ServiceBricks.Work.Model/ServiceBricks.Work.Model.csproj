@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.4.0-d</Version>
+		<Version>1.4.0-e</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Work.Model</PackageId>
 		<Title>ServiceBricks.Work.Model</Title>
@@ -34,9 +34,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks" Version="1.4.0-d" />		
+		<PackageReference Include="ServiceBricks" Version="1.4.0-e" />		
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Cache.Model" Version="1.4.0-d" />
+		<PackageReference Include="ServiceBricks.Cache.Model" Version="1.4.0-e" />
 	</ItemGroup>
 </Project>
