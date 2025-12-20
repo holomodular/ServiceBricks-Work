@@ -1,4 +1,4 @@
-![ServiceBricks Logo](https://github.com/holomodular/ServiceBricks/blob/main/Logo.png)  
+![ServiceBricks Logo](https://raw.githubusercontent.com/holomodular/ServiceBricks/main/Logo.png)  
 
 [![NuGet version](https://badge.fury.io/nu/ServiceBricks.Work.Microservice.svg)](https://badge.fury.io/nu/ServiceBricks.Work.Microservice)
 [![License: MIT](https://img.shields.io/badge/License-MIT-389DA0.svg)](https://opensource.org/licenses/MIT)
@@ -7,8 +7,8 @@
 
 ## Overview
 
-This repository contains a work microservice built using the ServiceBricks foundation.
-The work microservice exposes a ProcessDto object used to store a ProcessType and ProcessData properties that are used to process work from a table like a queue using the WorkService class.
+This repository contains the work microservice built using the ServiceBricks foundation.
+The work microservice exposes a ProcessDto object used to store a ProcessQueue, ProcessType and ProcessData properties that are used to process work from a table like a queue using the WorkService class.
 It exposes an abstract class WorkProcessService that encapsulates the functionality for you.
 
 ## Data Transfer Objects
@@ -99,7 +99,8 @@ None
 ## Additional
 
 ### WorkProcessService class
-This abstract class provides the functionality to process the ProcessDto table like a queue. Each derived class should set the ProcessQueue name, so the table can be used with multiple-queues
+This abstract class provides the functionality to process the ProcessDto table like a queue. Each derived class should set the ProcessQueue name, so the table can be used with multiple-queues.
+It relies on the ServiceBricks Cache Microservice to provide a distributed semaphore, to provide a gate with multiple servers running.
 
 ## Application Settings
 None
@@ -107,5 +108,5 @@ None
 # About ServiceBricks
 
 ServiceBricks is the cornerstone for building a microservices foundation.
-Visit http://ServiceBricks.com to learn more.
+Visit https://ServiceBricks.com to learn more.
 
