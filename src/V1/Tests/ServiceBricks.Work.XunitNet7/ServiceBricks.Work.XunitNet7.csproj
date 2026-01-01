@@ -17,8 +17,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.4.0-e" />
-		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-e" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.4.0" />
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\ServiceBricks.Work\ServiceBricks.Work.csproj" />

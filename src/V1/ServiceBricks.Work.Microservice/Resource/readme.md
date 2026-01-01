@@ -1,64 +1,112 @@
-﻿![ServiceBricks Logo](https://github.com/holomodular/ServiceBricks/blob/main/Logo.png)  
+﻿![ServiceBricks Logo](https://raw.githubusercontent.com/holomodular/ServiceBricks/main/Logo.png)  
 
-[![NuGet version](https://badge.fury.io/nu/ServiceBricks.svg)](https://badge.fury.io/nu/ServiceBricks)
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/holomodular-support/bdb5c7c570a7a88ffb3efb3505273e34/raw/servicebricks-codecoverage.json)
+[![NuGet version](https://badge.fury.io/nu/ServiceBricks.Work.Microservice.svg)](https://badge.fury.io/nu/ServiceBricks.Work.Microservice)
 [![License: MIT](https://img.shields.io/badge/License-MIT-389DA0.svg)](https://opensource.org/licenses/MIT)
 
-# ServiceBricks: The Microservices Foundation
+# ServiceBricks Work Microservice
 
 ## Overview
 
-[ServiceBricks](https://ServiceBricks.com) is a powerful microservices platform designed to streamline the development, deployment, and maintenance of distributed systems using artificial intelligence. 
-Leveraging Domain-Driven Design (DDD), Event-Driven Architecture (EDA), and a host of advanced features, ServiceBricks empowers teams to create scalable, customizable services tailored to specific business domains.
+This repository contains the work microservice built using the ServiceBricks foundation.
+The work microservice exposes a ProcessDto object used to store a ProcessQueue, ProcessType and ProcessData properties that are used to process work from a table like a queue using the WorkService class.
+It exposes an abstract class WorkProcessService that encapsulates the functionality for you.
 
-## Why ServiceBricks?
+## Data Transfer Objects
 
-* **Artificial Intelligence:** Use our online generator to create production-grade microservices in seconds using only a single human sentence as input.
-* **Advanced Architecture:** Provides the core architectural patterns, implementation, standardization, and governance for your microservices.
-* **REST APIs:** Expose standardized, secure REST APIs to manage your data.
-* **Storage Agnostic:** Interchangeably supports relational, document, cloud or embedded database engines
-* **Seamless Integration:** Switch storage providers without impacting microservice operations and avoid vendor lock-in.
+### ProcessDto - Admin Policy
+Used to process a table like a queue.
 
+```csharp
 
-## Major Features
+public partial class ProcessDto : DataTransferObject, IDpWorkProcess
+{
+    /// <summary>
+    /// This is the create date.
+    /// </summary>
+    public DateTimeOffset CreateDate { get; set; }
 
-* **Artificial Intelligence Integration:** Use large language models to build, query and manipulate your microservice data using simple human input.
-* **Generics:** Extensive use of generics, allowing the compiler to generate most of the required source code.
-* **REST API Services:** Templated, repository-based services for quickly exposing standard CRUD+QPV (Query, Patch, Validate) methods or custom methods.
-* **[ServiceQuery Integration](https://github.com/holomodular/ServiceQuery):** Supports standardized, polyglot, dynamic data querying for all database engines.
-* **[Business Rule Engine](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BusinessRuleEngine.md):** Polymorphic techniques to build reusable business logic.
-* **[Domain-Driven Design (DDD)](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/FlowOfData.md) & [Event-Driven Architecture (EDA)](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/EventDrivenArchitecture.md):** Customize business logic for any supported object and method.
-* **[Background Processing](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BackgroundTasks.md):** Supports asynchronous processes, tasks, and rules.
-* **[Relational, Document, Cloud and Embedded Database Support](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/SupportedDatabaseEngines.md):** Works standard with Azure Data Tables, Cosmos DB, InMemory, MongoDB, Postgres, SQLite, SQL Server and more.
-* **[Service Bus Engine](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BroadcastsAndServiceBus.md):** Supports broadcasts of system data with InMemory and Azure Service Bus.
-* **[Classic or Modern REST API Design](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/ClassicVsModernRestApi.md):** Choose between Classic or Modern modes, with various response formats.
-* **[NuGet Packages](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/NuGet.md):** Quickly build new services and applications.
-* **Testing Framework:** Comprehensive Xunit test framework for robust unit and integration testing with thousands of tests available.
-* **Open Source:** All referenced assemblies are open source and licensed under MIT or an equivalent license.
+    /// <summary>
+    /// This is the update date.
+    /// </summary>
+    public DateTimeOffset UpdateDate { get; set; }
 
+    /// <summary>
+    /// The queue name.
+    /// </summary>
+    public string ProcessQueue { get; set; }
 
-## Getting Started with Examples
+    /// <summary>
+    /// The work type.
+    /// </summary>
+    public string ProcessType { get; set; }
 
-Explore our [ServiceBricks-Examples](https://github.com/holomodular/ServiceBricks-Examples) repository for practical examples on hosting and deploying your ServiceBricks foundation. From single, monolithic web applications to distributed, multi-deployment, containerized web applications, these examples provide the building blocks to create and scale your own foundations quickly.
+    /// <summary>
+    /// The work details.
+    /// </summary>
+    public string ProcessData { get; set; }
 
-## Documentation
+    /// <summary>
+    /// Determine if completed processing.
+    /// </summary>
+    public bool IsComplete { get; set; }
 
-Check out our [ServiceBricks-Documentation](https://github.com/holomodular/ServiceBricks-Documentation) repository for comprehensive documentation on the platform, including guides on using all components and developing your own microservices.
+    /// <summary>
+    /// Determine if an error occured.
+    /// </summary>
+    public bool IsError { get; set; }
 
-## Official Pre-Built Microservices
+    /// <summary>
+    /// Determine if currently processing.
+    /// </summary>
+    public bool IsProcessing { get; set; }
 
-Get started quickly with our pre-built microservices:
+    /// <summary>
+    /// The retry count.
+    /// </summary>
+    public int RetryCount { get; set; }
 
-* [ServiceBricks-Cache](https://github.com/holomodular/ServiceBricks-Cache): Generic data storage microservice with a built in expiration process and a distributed semaphore for cache-level locking for multi-instance deployments.
-* [ServiceBricks-Logging](https://github.com/holomodular/ServiceBricks-Logging): Service-scoped or centralized logging and a web request auditing microservice.
-* [ServiceBricks-Notification](https://github.com/holomodular/ServiceBricks-Notification): Notification and delivery for emails and SMS messages.
-* [ServiceBricks-Security](https://github.com/holomodular/ServiceBricks-Security): Authentication, authorization, and application security with JWT bearer token support for multi-instance deployments.
-* [ServiceBricks-Work](https://github.com/holomodular/ServiceBricks-Work): Work queue microservice for reliable, event-driven background processing.
+    /// <summary>
+    /// The processing date.
+    /// </summary>
+    public DateTimeOffset ProcessDate { get; set; }
 
-## Trademarks
+    /// <summary>
+    /// The future processing date.
+    /// </summary>
+    public DateTimeOffset FutureProcessDate { get; set; }
 
-“ServiceBricks”, "ServiceQuery" and “HoloModular” are trademarks of HoloModular LLC. The MIT License covers code only; it does not grant rights to use our trademarks, logos, or brand assets (including in modified or redistributed versions) without permission.
+    /// <summary>
+    /// The process response.
+    /// </summary>
+    public string ProcessResponse { get; set; }
+}
 
-## About
+```
 
-ServiceBricks is owned and maintained by HoloModular LLC and authored by Danny Logsdon (Founder). Visit our websites at https://HoloModular.com, https://ServiceBricks.com or https://www.linkedin.com/in/danlogsdon to learn more.
+## Background Tasks and Timers
+
+None
+
+## Events
+None
+
+## Processes
+None
+
+## Service Bus
+None
+
+## Additional
+
+### WorkProcessService class
+This abstract class provides the functionality to process the ProcessDto table like a queue. Each derived class should set the ProcessQueue name, so the table can be used with multiple-queues.
+It relies on the ServiceBricks Cache Microservice to provide a distributed semaphore, to provide a gate with multiple servers running.
+
+## Application Settings
+None
+
+# About ServiceBricks
+
+ServiceBricks is the cornerstone for building a microservices foundation.
+Visit https://ServiceBricks.com to learn more.
+
